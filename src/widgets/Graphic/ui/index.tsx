@@ -13,7 +13,7 @@ import {
 import { getWeather } from '../../../features/weather/api';
 import { ForecastData } from '../../../@types/weather';
 import { formatDate } from '../../../utils/formatDate';
-import { Loader } from '../../Loader';
+import { Loader } from '../../../shared/Loader';
 
 ChartJS.register(
   CategoryScale,
