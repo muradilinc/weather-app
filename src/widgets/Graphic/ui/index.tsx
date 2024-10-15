@@ -54,10 +54,6 @@ export const Graphic = () => {
     fetchWeatherForecast();
   }, []);
 
-  if (forecastData.length === 0) {
-    return <Loader />;
-  }
-
   const labels = forecastData.map((item) => formatDate(item.dt_txt));
   const temperatures = forecastData.map((item) => item.main.temp);
 
@@ -73,6 +69,10 @@ export const Graphic = () => {
       },
     ],
   };
+
+  if (forecastData.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <div className="w-[1200px] mx-auto bg-white p-12 rounded-[8px]">
