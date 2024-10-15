@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { getWeather } from '../../../features/weather/api';
+import { getAllWeather } from '../../../features/weather/api';
 import { ForecastData } from '../../../@types/weather';
 import { formatDate } from '../../../utils/formatDate';
 import { Loader } from '../../../shared/Loader';
@@ -33,7 +33,7 @@ const options = {
     },
     title: {
       display: true,
-      text: '5-Day Weather Forecast (3-Hour Intervals)',
+      text: 'Bishkek 5-Day Weather Forecast (3-Hour Intervals)',
     },
   },
 };
@@ -44,7 +44,7 @@ export const Graphic = () => {
   useEffect(() => {
     const fetchWeatherForecast = async () => {
       try {
-        const data = await getWeather();
+        const data = await getAllWeather();
         setForecastData(data.list);
       } catch (error) {
         console.error('Error fetching weather forecast:', error);
