@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -9,11 +9,15 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { getAllWeather } from '../../../features/weather/api';
 import { ForecastData } from '../../../@types/weather';
 import { formatDate } from '../../../utils/formatDate';
 import { Loader } from '../../../shared/Loader';
+import { DateSelector } from '../../../shared/DateSelector';
+import { processWeatherData } from '../../../utils/processWeatherData';
 
 ChartJS.register(
   CategoryScale,
@@ -23,23 +27,12 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ChartDataLabels,
 );
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Bishkek 5-Day Weather Forecast (3-Hour Intervals)',
-    },
-  },
-};
-
-export const Graphic = () => {
+export const Graphic: React.FC = () => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string>('');
 
   useEffect(() => {
     const fetchWeatherForecast = async () => {
@@ -54,20 +47,60 @@ export const Graphic = () => {
     fetchWeatherForecast();
   }, []);
 
-  const labels = forecastData.map((item) => formatDate(item.dt_txt));
-  const temperatures = forecastData.map((item) => item.main.temp);
+  const groupedData = processWeatherData(forecastData);
+  const dates = Object.keys(groupedData);
 
-  const data = {
+  const labels = selectedDate
+    ? groupedData[selectedDate].temperatures.map(
+        (item) => item.time.split(' ')[1],
+      )
+    : dates.map((date) => formatDate(date).split(',')[0]);
+
+  const temperatures = selectedDate
+    ? groupedData[selectedDate].temperatures.map((item) => item.temp)
+    : dates.map((date) =>
+        Math.max(
+          ...groupedData[date].temperatures.map((dateItem) => dateItem.temp),
+        ),
+      );
+
+  const data: ChartData<'line'> = {
     labels,
     datasets: [
       {
-        label: 'Temperature (°C)',
+        label: 'Temperatures (°C)',
         data: temperatures,
         borderColor: 'red',
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
         fill: true,
+        datalabels: {
+          display: true,
+        },
       },
     ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: `Bishkek ${selectedDate ? selectedDate : '5-Day'} Weather Forecast`,
+      },
+      datalabels: {
+        color: 'black',
+        align: 'end' as const,
+        anchor: 'end' as const,
+        formatter: (value: number) => `${value}°C`,
+      },
+    },
+  };
+
+  const handleDateChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDate(event.target.value);
   };
 
   if (forecastData.length === 0) {
@@ -75,7 +108,15 @@ export const Graphic = () => {
   }
 
   return (
-    <div className="w-[1200px] mx-auto bg-white p-12 rounded-[8px]">
+    <div className="bg-white d-flex flex-column p-3 rounded-bottom-3">
+      <div className="d-flex justify-content-end">
+        <DateSelector
+          type="graphic"
+          dates={dates}
+          selectedDate={selectedDate}
+          onDateChange={handleDateChange}
+        />
+      </div>
       <Line options={options} data={data} />
     </div>
   );

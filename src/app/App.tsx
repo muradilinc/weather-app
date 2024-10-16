@@ -6,14 +6,16 @@ import { Tab } from 'react-bootstrap';
 const App = () => {
   return (
     <div className="flex justify-center items-center my-5">
-      <NavTabs>
-        <Tab eventKey="weather" title="Current">
-          <Card />
-        </Tab>
-        <Tab eventKey="graphic" title="Graphic">
-          <Graphic />
-        </Tab>
-      </NavTabs>
+      <div className="w-75 mx-auto">
+        <NavTabs>
+          <Tab eventKey="weather" title="День" tabClassName="text-black">
+            <Card />
+          </Tab>
+          <Tab eventKey="graphic" title="График" tabClassName="text-black">
+            <Graphic />
+          </Tab>
+        </NavTabs>
+      </div>
     </div>
   );
 };

@@ -8,16 +8,17 @@ export interface Main {
   sea_level: number;
   grnd_level: number;
 }
+
 export interface Weather {
   description: string;
   icon: string;
   id: number;
   main: string;
 }
-export interface WeatherData {
-  name: string;
-  weather: Weather[];
-  main: Main;
+
+export interface AnswerApi {
+  city: { name: string };
+  list: ForecastData[];
 }
 
 export interface ForecastData {
@@ -25,4 +26,9 @@ export interface ForecastData {
   dt_txt: string;
   main: Main;
   weather: Weather[];
+}
+
+export interface GroupedData {
+  temperatures: { time: string; temp: number }[];
+  label: string;
 }

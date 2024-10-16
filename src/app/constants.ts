@@ -3,3 +3,12 @@ export const api = {
   base: 'https://api.openweathermap.org/data/2.5',
 };
 export const API_LINK = api.base;
+export const modes: { type: string; mode: string }[] = [
+  { type: 'Утро', mode: 'morning' },
+  { type: 'День', mode: 'day' },
+  {
+    type: 'Вечер',
+    mode: 'evening',
+  },
+  { type: 'Ночь', mode: 'night' },
+];
