@@ -30,7 +30,7 @@ export const Card = () => {
       </div>
 
       <div className="d-flex flex-row justify-content-between border-co flex-wrap">
-        <div className="d-flex flex-column gap-2 w-100 p-5">
+        <div className="d-flex flex-column gap-5 w-100 p-5">
           {modes.map((mode) => (
             <WeatherCard
               key={mode.type}

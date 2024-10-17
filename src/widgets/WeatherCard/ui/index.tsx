@@ -13,7 +13,7 @@ export const WeatherCard: React.FC<Props> = ({ title, weatherData }) => {
     <>
       {weatherData.map((item) => (
         <div
-          className={`d-flex align-items-center shadow p-3 mb-5 text-white justify-content-between px-3 w-100 ${title !== 'Вечер' && title !== 'Ночь' ? 'blue-day' : 'sky-night'}`}
+          className={`d-flex align-items-center shadow p-3 text-white justify-content-between px-3 w-100 ${title !== 'Вечер' && title !== 'Ночь' ? 'blue-day' : 'sky-night'}`}
         >
           <div className="d-flex gap-5 align-items-center">
             <img
