@@ -29,48 +29,17 @@ export const Card = () => {
         />
       </div>
 
-      <div className="d-flex flex-row justify-content-between border-co">
-        <div className="w-50 p-5">
-          <h4 className="text-center fw-bolder fs-2">День</h4>
-          <div className="d-flex flex-column gap-2">
-            {modes.map((mode) => {
-              if (mode.mode === 'morning' || mode.mode === 'day') {
-                return (
-                  <WeatherCard
-                    modeDay="day"
-                    key={mode.type}
-                    title={mode.type}
-                    weatherData={
-                      currentDayWeather[
-                        mode.mode as keyof typeof currentDayWeather
-                      ]
-                    }
-                  />
-                );
+      <div className="d-flex flex-row justify-content-between border-co flex-wrap">
+        <div className="d-flex flex-column gap-2 w-100 p-5">
+          {modes.map((mode) => (
+            <WeatherCard
+              key={mode.type}
+              title={mode.type}
+              weatherData={
+                currentDayWeather[mode.mode as keyof typeof currentDayWeather]
               }
-            })}
-          </div>
-        </div>
-        <div className="w-50 dark-night p-5">
-          <h4 className="text-center text-white fw-bolder fs-2">Ночь</h4>
-          <div className="d-flex flex-column gap-2">
-            {modes.map((mode) => {
-              if (mode.mode === 'evening' || mode.mode === 'night') {
-                return (
-                  <WeatherCard
-                    modeDay="night"
-                    key={mode.type}
-                    title={mode.type}
-                    weatherData={
-                      currentDayWeather[
-                        mode.mode as keyof typeof currentDayWeather
-                      ]
-                    }
-                  />
-                );
-              }
-            })}
-          </div>
+            />
+          ))}
         </div>
       </div>
     </div>
