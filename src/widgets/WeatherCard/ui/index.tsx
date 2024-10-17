@@ -1,5 +1,17 @@
 import React from 'react';
 import { ForecastData } from '../../../@types/weather';
+import sunny from '../../../../public/sunny.svg';
+import partlyCloudy from '../../../../public/partly-cloudy.svg';
+import cloudy from '../../../../public/cloudy.svg';
+import fog from '../../../../public/fog.svg';
+import heavyRain from '../../../../public/heavy-rain.svg';
+import scatteradShower from '../../../../public/scatterad-showers.svg';
+import scatteradThunderStorm from '../../../../public/scatterad-thunderstorm.svg';
+import snow from '../../../../public/snow.svg';
+import clearNight from '../../../../public/clear-night.svg';
+import clearCloudyNight from '../../../../public/cloudy-clear-night.svg';
+import partyCloudyNight from '../../../../public/partly-cloudy-night.svg';
+import scatteradShowerNight from '../../../../public/scatterad-showers-night.svg';
 
 interface Props {
   title: string;
@@ -7,17 +19,39 @@ interface Props {
 }
 
 export const WeatherCard: React.FC<Props> = ({ title, weatherData }) => {
+  const allIcons: { [key: string]: string } = {
+    '01d': sunny,
+    '02d': partlyCloudy,
+    '03d': cloudy,
+    '04d': fog,
+    '09d': heavyRain,
+    '10d': scatteradShower,
+    '11d': scatteradThunderStorm,
+    '13d': snow,
+    '50d': fog,
+    '01n': clearNight,
+    '02n': partyCloudyNight,
+    '03n': clearCloudyNight,
+    '04n': fog,
+    '09n': heavyRain,
+    '10n': scatteradShowerNight,
+    '11n': scatteradThunderStorm,
+    '13n': snow,
+    '50n': fog,
+  };
+
   if (weatherData.length === 0) return null;
 
   return (
     <>
       {weatherData.map((item) => (
         <div
-          className={`d-flex align-items-center shadow p-3 text-white justify-content-between px-3 w-100 ${title !== 'Вечер' && title !== 'Ночь' ? 'blue-day' : 'sky-night'}`}
+          className={`d-flex align-items-center shadow p-3 text-white justify-content-between w-100 rounded ${title !== 'Вечер' && title !== 'Ночь' ? 'blue-day' : 'sky-night'}`}
         >
           <div className="d-flex gap-5 align-items-center">
             <img
-              src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+              style={{ width: '45px' }}
+              src={allIcons[item.weather[0].icon]}
               alt={title}
             />
             <div className="d-flex flex-column gap-2">

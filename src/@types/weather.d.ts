@@ -29,6 +29,6 @@ export interface ForecastData {
 }
 
 export interface GroupedData {
-  temperatures: { time: string; temp: number }[];
+  temperatures: { time: string; temp: number; icon: string }[];
   label: string;
 }

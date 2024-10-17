@@ -1,18 +1,20 @@
-import { ChangeEvent, useState } from 'react';
+import React from 'react';
 import { Loader } from '../../../shared/Loader';
-import { DateSelector } from '../../../shared/DateSelector';
-import { useWeather } from '../../../utils/useWeather';
 import { WeatherCard } from '../../WeatherCard';
 import { modes } from '../../../app/constants';
+import { ForecastData } from '../../../@types/weather';
 
-export const Card = () => {
-  const [selectDate, setSelectDate] = useState('');
-  const { currentDayWeather, dates, location } = useWeather(selectDate);
+interface Props {
+  currentDayWeather: {
+    morning: ForecastData[];
+    day: ForecastData[];
+    evening: ForecastData[];
+    night: ForecastData[];
+  } | null;
+  location: string;
+}
 
-  const handleDateChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectDate(event.target.value);
-  };
-
+export const Card: React.FC<Props> = ({ currentDayWeather, location }) => {
   if (!currentDayWeather) {
     return <Loader />;
   }
@@ -21,12 +23,6 @@ export const Card = () => {
     <div className="bg-white p-3 rounded-bottom-1">
       <div className="d-flex align-items-center justify-content-between flex-wrap">
         <h2 className="w-50">Прогноз на сегодня {location}</h2>
-        <DateSelector
-          type="single"
-          dates={dates}
-          onDateChange={handleDateChange}
-          selectedDate={selectDate}
-        />
       </div>
 
       <div className="d-flex flex-row justify-content-between border-co flex-wrap">
