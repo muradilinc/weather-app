@@ -1,5 +1,19 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 body {
   background: #d0f4de;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.blue-day {
+  background: #89c2d9;
+}
+.sky-night {
+  background: #e7c6ff;
+}
+.dark-night {
+  background: #10002b;
 }
