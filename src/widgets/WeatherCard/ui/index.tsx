@@ -1,17 +1,17 @@
 import React from 'react';
 import { ForecastData } from '../../../@types/weather';
-import sunny from '../../../../public/sunny.svg';
-import partlyCloudy from '../../../../public/partly-cloudy.svg';
-import cloudy from '../../../../public/cloudy.svg';
-import fog from '../../../../public/fog.svg';
-import heavyRain from '../../../../public/heavy-rain.svg';
-import scatteradShower from '../../../../public/scatterad-showers.svg';
-import scatteradThunderStorm from '../../../../public/scatterad-thunderstorm.svg';
-import snow from '../../../../public/snow.svg';
-import clearNight from '../../../../public/clear-night.svg';
-import clearCloudyNight from '../../../../public/cloudy-clear-night.svg';
-import partyCloudyNight from '../../../../public/partly-cloudy-night.svg';
-import scatteradShowerNight from '../../../../public/scatterad-showers-night.svg';
+import sunny from '/sunny.svg';
+import partlyCloudy from '/partly-cloudy.svg';
+import cloudy from '/cloudy.svg';
+import fog from '/fog.svg';
+import heavyRain from '/heavy-rain.svg';
+import scatteradShower from '/scatterad-showers.svg';
+import scatteradThunderStorm from '/scatterad-thunderstorm.svg';
+import snow from '/snow.svg';
+import clearNight from '/clear-night.svg';
+import clearCloudyNight from '/cloudy-clear-night.svg';
+import partyCloudyNight from '/partly-cloudy-night.svg';
+import scatteradShowerNight from '/scatterad-showers-night.svg';
 
 interface Props {
   title: string;
